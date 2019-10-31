@@ -25,7 +25,7 @@ close all;
         I_B  =(V_bias-V_BE)/R_bias;                 %Caculating Value of I_B from V_BE
         I_C  =I_B*beta;                              
         V_BE =V_t*log(I_C/I_s);                     %update V_BE from iterated I_C
-        err  =err-V_BE;                             %err= V_BE-V_BE_updated
+        err  =err-V_BE;                             %err = V_BE-V_BE_new
     end
     
     V_B     =V_BE+V_E;                              %V_BE=V_B-V_E
