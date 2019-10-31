@@ -61,6 +61,3 @@ function R=P_Resistance(varargin)
     R = 1/sum(1./resistor_vec(1,1:resistor_num)); %Caculating Parellel Resistance 
                                                   %from vector value
 end
-    
-
-
