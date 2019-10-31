@@ -17,20 +17,20 @@ close all;
 %-etc-%
     e_tol =1e-7;
     beta  =100;
+    
 
 %%main
 
 
-function R=Conductance(varargin)
-    resistor_num     =nargin; 
-    resistor_vec     =zeros(1,resistor_num); 
+%-funtion for caculating Parellel Resistance-%
+function R=P_Resistance(varargin)
+    resistor_num     =nargin;                     %number of input parameter
+    resistor_vec     =zeros(1,resistor_num);      %intializing vector
     
     for i=1:resistor_num
-        resistor_vec(i) = varargin{i}; 
+        resistor_vec(i) = varargin{i};            %input value in vector
     end
     
-    R = 1/sum(1./resistor_vec(1,1:resistor_num));
+    R = 1/sum(1./resistor_vec(1,1:resistor_num)); %Caculating Parellel Resistance 
+                                                  %from vector value
 end
-    
-
-
