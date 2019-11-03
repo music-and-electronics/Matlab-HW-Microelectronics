@@ -5,7 +5,7 @@ close all;
     R_b1  =100e3;
     R_b2  =100e3;
 %-Voltage-%
-    V_cc  =3.3;
+    V_cc  =4.0;
     V_t   =26e-3; 
     V_E   =0.2;
 %-Current-%
