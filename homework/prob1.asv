@@ -72,15 +72,13 @@ close all;
         error_gain =gain_cal-gain_taget;
         
         if error_gain>0 %if gain_target is larger than gain_cal
-            R_b2 =R_b2+0.1; 
+            R_b2 =R_b2+0.01; 
         else            %else if gain_cal is larger than gain target
-            R_b2 =R_b2-0.1;
+            R_b2 =R_b2-0.;
         end
 
     end
-    I_B  =(V_bias-V_BE)/R_bias;                 
-    I_C  =I_B*beta;  
-    disp(R_b2); disp(gain_cal); disp(I_C);
+    disp(R_b2);
     
 
 %-funtion for caculating Parellel Resistance-%
