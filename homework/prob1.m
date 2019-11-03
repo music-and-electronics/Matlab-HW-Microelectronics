@@ -48,7 +48,7 @@ close all;
     gain    =-(P_Resistance(R_c,R_L,r_o)/((1/gm)+R_T/(1+beta)))*R_in;
     disp(gain);
 %-(c)-%
-    t       =[0:1e-6:3e-4]';
+    t       =[0:1e-10:3e-4]';
     freq    =10e3;
     V_in    =1e-3*sin(2*pi*freq.*t);
     V_c1    =gain*V_in;
@@ -56,7 +56,7 @@ close all;
     figure;
     plot(t,V_c1,'LineWidth',2);
     grid on
-    title('-the plot of Vc1-');
+    title('The Plot Of Vc1');
     num     =3e-4;
     xlabel(['time[s] : 0<t<',num2str(num)],'fontsize',12);
     ylabel('Vc1[V]','fontsize',12);
@@ -65,9 +65,17 @@ close all;
 %-(d)-%
     gain_taget  =-50;
     error_gain  =10;
+
     while(abs(error_gain)>abs(gain_taget/100))
+        V_bias     =(R_b2/(R_b1+R_b2))*V_cc; 
         R_bias     =P_Resistance(R_b1,R_b2);
+        I_B        =(V_bias-V_BE)/R_bias;  
+        I_C        =I_B*beta;        
+        V_BE       =V_t*log(I_C/I_s);           
+        r_o        =V_A/I_C;
+        gm         =I_C/V_t;        
         R_in       =R_bias/(R_src+R_bias);
+        R_T        =P_Resistance(R_bias,R_src);
         gain_cal   =-(P_Resistance(R_c,R_L,r_o)/((1/gm)+R_T/(1+beta)))*R_in;
         error_gain =gain_cal-gain_taget;
         
@@ -78,8 +86,7 @@ close all;
         end
 
     end
-    I_B  =(V_bias-V_BE)/R_bias;                 
-    I_C  =I_B*beta;  
+
     disp(R_b2); disp(gain_cal); disp(I_C);
     
 
