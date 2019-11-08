@@ -27,7 +27,7 @@ close all;
         V_BE =V_t*log(I_C/I_s);                     %update V_BE from iterated I_C
         err  =err-V_BE;                             %err = V_BE-V_BE_new
     end
-    V_B =V_BE+V_E;                                  %V_BE is V_B - V_E
+    V_B    =V_BE+V_E;                               %V_BE is V_B - V_E
     R_C_max=(V_cc-V_B)/I_C;                         %Rc is max when V_C = V_B
 
     disp(I_C); disp(V_B); disp(R_C_max);
@@ -66,7 +66,8 @@ close all;
     gain_taget  =-50;                              %initial target value of gain
     error_gain  =10;                               %initial gain assumption
 
-    while(abs(error_gain)>abs(gain_taget/100))     %if error value is less or same with 1% of target gain
+    %if error value is less or same with 1% of target gain -> break
+    while(abs(error_gain)>abs(gain_taget/100))     
         V_bias     =(R_b2/(R_b1+R_b2))*V_cc;       
         R_bias     =P_Resistance(R_b1,R_b2);
         I_B        =(V_bias-V_BE)/R_bias;  
@@ -87,7 +88,6 @@ close all;
 
     end
     
-
     disp(R_b2); disp(gain_cal); disp(I_C);
     
 
