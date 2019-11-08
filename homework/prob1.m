@@ -77,8 +77,10 @@ close all;
         gm         =I_C/V_t;        
         R_in       =R_bias/(R_src+R_bias);
         R_T        =P_Resistance(R_bias,R_src);
-        gain_cal   =-(P_Resistance(R_c,R_L,r_o)/((1/gm)+R_T/(1+beta)))*R_in;    %updating gain by updated gain factors
-        error_gain =gain_cal-gain_taget;                                        %updating gain error value by updated gain
+        %updating gain by updated gain factors
+        gain_cal   =-(P_Resistance(R_c,R_L,r_o)/((1/gm)+R_T/(1+beta)))*R_in;    
+        %updating gain error value by updated gain
+        error_gain =gain_cal-gain_taget;                                        
         
         if error_gain>0 %if gain_target is larger than gain_cal
             R_b2 =R_b2+0.1; 
