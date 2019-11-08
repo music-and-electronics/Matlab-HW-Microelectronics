@@ -27,9 +27,8 @@ close all;
         V_BE =V_t*log(I_C/I_s);                     %update V_BE from iterated I_C
         err  =err-V_BE;                             %err = V_BE-V_BE_new
     end
-    
-    V_B     =V_BE+V_E;                              %V_BE=V_B-V_E
-    R_C_max =(V_cc-V_B)/I_C;                        %R_C is max when V_B=V_C
+    V_B =V_BE+V_E;
+    R_C_max=(V_cc-V_B)/I_C;
 
     disp(I_C); disp(V_B); disp(R_C_max);
 
@@ -51,7 +50,8 @@ close all;
     t       =[0:1e-10:3e-4]';
     freq    =10e3;
     V_in    =1e-3*sin(2*pi*freq.*t);
-    V_c1    =gain*V_in;
+    V_dc= V_cc-I_C*R_c;
+    V_c1    =gain*V_in+V_dc;
     
     figure;
     plot(t,V_c1,'LineWidth',2);
@@ -86,6 +86,7 @@ close all;
         end
 
     end
+    
 
     disp(R_b2); disp(gain_cal); disp(I_C);
     
