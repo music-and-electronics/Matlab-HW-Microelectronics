@@ -22,7 +22,7 @@ close all;
 
     while (abs(err)>e_tol)           
         err  =V_BE;                                 %err=V_BE
-        I_B  =(V_bias-V_BE)/R_bias;                 %Caculating Value of I_B from V_BE
+        I_B  =(V_bias-V_BE-V_E)/R_bias;              %Caculating Value of I_B from V_BE
         I_C  =I_B*beta;                              
         V_BE =V_t*log(I_C/I_s);                     %update V_BE from iterated I_C
         err  =err-V_BE;                             %err = V_BE-V_BE_new
@@ -57,7 +57,7 @@ close all;
     figure;
     plot(t,V_c1,'LineWidth',2);                    %characteristic of graph line
     grid on
-    title('The Plot Of Vc1 (V/time)');             %title of plot
+    title('V-time Characteristic of Vc1');         %title of plot
     xlabel('time[s] (3 cycles)','fontsize',12);    %explain of x-axis
     ylabel('Vc1[V]','fontsize',12);                %explain of y-axis
     legend({'Vc1'},'Location','northeast');        %position of graph name label
