@@ -27,7 +27,7 @@
     V_B    =V_BE+V_E;                               %V_BE is V_B - V_E
     R_C_max=(V_cc-V_B)/I_C;                         %Rc is max when V_C = V_B
 
-    disp(I_C); disp(V_B); disp(R_C_max);
+    disp(I_C*1000); disp(V_B); disp(R_C_max/1000);
 
 %-Resistor-%
     R_c     =1e3;
@@ -91,7 +91,7 @@
 
     end
     
-    disp(R_b2); disp(gain_cal); disp(I_C*1000);
+    disp(R_b2/1000); disp(gain_cal); disp(I_C*1000);
     
 
 %-funtion for caculating Parellel Resistance-%
