@@ -1,6 +1,6 @@
 %-Resistor-%
     R_b1  =100e3;
-    R_b2  =100e3;
+    R_b2  =160e3;
 %-Voltage-%
     V_cc  =4.0;
     V_t   =26e-3; 
@@ -45,54 +45,8 @@
     %gain calculation in CE circuit
     V_divide   =r_pi/(r_pi+R_T);
     gain       =-gm*P_Resistance(R_c,R_L,r_o)*V_divide*R_in; 
-    disp(gm);disp(r_pi);disp(gain);
-%-(c)-%
-    t       =[0:1e-10:3e-4]';                      %time scale definition
-    freq    =10e3;                                 %freqeuncy definition
-    V_in    =1e-3*sin(2*pi*freq.*t);               %V_in definition
-    V_dc    =V_cc-I_C*R_c;                         %value of DC voltage in large signal model
-    V_c1    =gain*V_in+V_dc;                       %actual value of V_c1 with the effect of DC voltage
-  
-%-plot code of prob(c)-%
-    figure;
-    plot(t,V_c1,'LineWidth',2);                    %characteristic of graph line
-    grid on
-    title('V-time Characteristic of Vc1');         %title of plot
-    xlabel('time[s] (3 cycles)','fontsize',12);    %explain of x-axis
-    ylabel('Vc1[V]','fontsize',12);                %explain of y-axis
-    legend({'Vc1'},'Location','northeast');        %position of graph name label
-
-%-(d)-%
-    gain_taget  =-50;                              %initial target value of gain
-    error_gain  =10;                               %initial gain assumption
-
-    %if error value is less or same with 1% of target gain -> break
-    while(abs(error_gain)>abs(gain_taget/100)) 
-        V_bias     =(R_b2/(R_b1+R_b2))*V_cc;
-        R_bias     =P_Resistance(R_b1,R_b2);            
-        I_B        =(V_bias-V_BE-V_E)/R_bias;            
-        I_C        =I_B*beta;    
-        r_o        =V_A/I_C;
-        gm         =I_C/V_t;        
-        r_pi       =beta/gm;
-        R_in       =R_bias/(R_src+R_bias);
-        R_T        =P_Resistance(R_bias,R_src);
-        %updating gain by updated gain factors
-        V_divide   =(r_pi/(r_pi+R_T));
-        gain_cal   =-gm*P_Resistance(R_c,R_L,r_o)*V_divide*R_in; 
-        %updating gain error value by updated gain 
-        error_gain =gain_taget-gain_cal;                                        
+    disp(gain);
         
-        if error_gain<0 %gain_target is larger than gain_cal
-            R_b2 =R_b2+0.1; 
-        else            %gain_cal is larger than gain target
-            R_b2 =R_b2-0.1;
-        end
-
-    end
-    
-    disp(R_b2); disp(gain_cal); disp(I_C*1000);
-    
 
 %-funtion for caculating Parellel Resistance-%
 function R=P_Resistance(varargin)
