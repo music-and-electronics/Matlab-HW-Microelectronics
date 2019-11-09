@@ -31,7 +31,7 @@
 
 %-Resistor-%
     R_c     =1e3;
-    R_L     =10e3;
+    R_L     =4e3;
     R_src   =500;
     R_T     =P_Resistance(R_bias,R_src);           %value of thevenin equivalent resistance
 %-Voltage-%
@@ -41,10 +41,10 @@
     r_o     =V_A/I_C;                              %Early Resistance
     r_pi    =beta/gm;
 %-(b)-%
-    R_in    = R_bias/(R_src+R_bias);               %value of input impedence
+    R_in       = R_bias/(R_src+R_bias);               %value of input impedence
     %gain calculation in CE circuit
     V_divide   =(r_pi/(r_pi+R_T));
-    gain_cal   =-gm*P_Resistance(R_c,R_L,r_o)*V_divide*R_in; 
+    gain       =-gm*P_Resistance(R_c,R_L,r_o)*V_divide*R_in; 
     disp(gain);
 %-(c)-%
     t       =[0:1e-10:3e-4]';                      %time scale definition
@@ -83,7 +83,7 @@
         %updating gain error value by updated gain 
         error_gain =gain_cal-gain_taget;                                        
         
-        if error_gain>0 %if gain_target is larger than gain_cal
+        if error_gain<0 %if gain_target is larger than gain_cal
             R_b2 =R_b2+0.1; 
         else            %else gain_cal is larger than gain target
             R_b2 =R_b2-0.1;
